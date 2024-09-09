@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hitung Bareng Abi Najib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      color: white;
+      border-bottom: 8px solid #3b82f6;
+      overflow: hidden;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0.5;
+      z-index: -1;
+    }
+    .calculator {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .calculator:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+    .calculator select, .calculator input, .calculator button {
+      border-radius: 8px;
+    }
+    .calculator select, .calculator input {
+      background-color: #f3f4f6;
+      border: 2px solid #d1d5db;
+      padding: 12px;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+    .calculator select:focus, .calculator input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+    .calculator button {
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      color: white;
+      padding: 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.4);
+    }
+    .calculator button:hover {
+      transform: translateY(-3px);
+      background-color: #3730a3;
+    }
+    .calculator button:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+    .footer {
+      background-color: #4f46e5;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-top: 8px solid #3b82f6;
+    }
+    .footer p {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+    .footer p strong {
+      font-weight: 700;
+    }
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .calculator select {
+    background-color: white;
+    color: #4f46e5;
+    border: 2px solid #4f46e5;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    appearance: none; /* Menghilangkan default dropdown icon */
+    background-image: url('data:image/svg+xml,%3Csvg width="12" height="8" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1 1l5 5 5-5" stroke="%234f46e5" stroke-width="2" fill="none" fill-rule="evenodd"%3E%3C/path%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+  }
+
+  .calculator select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    outline: none;
+  }
+
+  .calculator input {
+    background-color: white;
+    color: #4f46e5;
+    border: 2px solid #4f46e5;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .calculator input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    outline: none;
+  }
+
+  .calculator button {
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .calculator button:hover {
+    background-color: #3730a3;
+    transform: translateY(-2px);
+  }
+
+  .calculator button:active {
+    background-color: #4f46e5;
+    transform: translateY(0);
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Particle.js Section -->
+  <div class="hero">
+    <div id="particles-js"></div>
+    <div data-aos="fade-down">
+      <h1>Hitung Bareng Abi Najib</h1>
+    </div>
+  </div>
+
+  <!-- Calculator Section -->
+  <div class="container mx-auto px-4 py-10">
+    <div class="calculator" data-aos="fade-up">
+      <h2 class="text-2xl font-semibold text-center mb-6">Pilih Operasi</h2>
+      <select id="operation" class="p-4 w-full mb-6 rounded-lg shadow-md">
+        <option value="add">Penjumlahan</option>
+        <option value="subtract">Pengurangan</option>
+        <option value="multiply">Perkalian</option>
+        <option value="divide">Pembagian</option>
+        <option value="modulus">Modulus</option>
+        <option value="sin">Sin</option>
+        <option value="cos">Cos</option>
+        <option value="tan">Tan</option>
+        <option value="log">Logaritma</option>
+        <option value="bin2hex">Biner ke Hexa</option>
+        <option value="hex2bin">Hexa ke Biner</option>
+        <option value="bin2oct">Biner ke Oktal</option>
+        <option value="oct2bin">Oktal ke Biner</option>
+        <option value="bin2dec">Biner ke Desimal</option>
+        <option value="dec2bin">Desimal ke Biner</option>
+        <option value="dec2hex">Desimal ke Hexa</option>
+        <option value="hex2dec">Hexa ke Desimal</option>
+      </select>
+
+      <div id="inputs">
+        <!-- Input untuk operasi matematika -->
+        <div id="math-inputs" style="display: none;">
+          <input id="input1" type="number" placeholder="Angka pertama" class="p-4 w-full mb-4 rounded-lg shadow-md">
+          <input id="input2" type="number" placeholder="Angka kedua" class="p-4 w-full mb-4 rounded-lg shadow-md">
+        </div>
+        <!-- Input untuk konversi bilangan -->
+        <div id="conversion-inputs" style="display: none;">
+          <input id="conversionInput" type="text" placeholder="Masukkan angka" class="p-4 w-full mb-4 rounded-lg shadow-md">
+        </div>
+      </div>
+
+      <button onclick="calculate()">Hitung</button>
+
+      <h2 class="text-xl text-center mt-4">Hasil: <span id="result" class="font-bold text-blue-600">0</span></h2>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>Website ini khusus dibuat untuk <strong>Caith</strong> oleh Abi Najib.</p>
+  </footer>
+
+  <!-- AOS and Particle.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 700
+          }
+        },
+        "color": {
+          "value": "#ffffff"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 6,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "repulse"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 400,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
+
+    AOS.init({
+      duration: 1000
+    });
+
+    document.getElementById("operation").addEventListener("change", function () {
+      const operation = document.getElementById("operation").value;
+      const mathInputs = document.getElementById("math-inputs");
+      const conversionInputs = document.getElementById("conversion-inputs");
+
+      if (["add", "subtract", "multiply", "divide", "modulus"].includes(operation)) {
+        mathInputs.style.display = "block";
+        conversionInputs.style.display = "none";
+      } else {
+        mathInputs.style.display = "none";
+        conversionInputs.style.display = "block";
+      }
+    });
+
+    function calculate() {
+      const operation = document.getElementById("operation").value;
+      let result = 0;
+
+      if (["add", "subtract", "multiply", "divide", "modulus"].includes(operation)) {
+        const input1 = parseFloat(document.getElementById("input1").value);
+        const input2 = parseFloat(document.getElementById("input2").value);
+
+        if (isNaN(input1) || isNaN(input2)) {
+          result = "Masukkan angka valid.";
+        } else {
+          switch (operation) {
+            case "add":
+              result = input1 + input2;
+              break;
+            case "subtract":
+              result = input1 - input2;
+              break;
+            case "multiply":
+              result = input1 * input2;
+              break;
+            case "divide":
+              result = input1 / input2;
+              break;
+            case "modulus":
+              result = input1 % input2;
+              break;
+          }
+        }
+      } else {
+        const input = document.getElementById("conversionInput").value;
+        switch (operation) {
+          case "sin":
+            result = Math.sin(parseFloat(input));
+            break;
+          case "cos":
+            result = Math.cos(parseFloat(input));
+            break;
+          case "tan":
+            result = Math.tan(parseFloat(input));
+            break;
+          case "log":
+            result = Math.log(parseFloat(input));
+            break;
+          case "bin2hex":
+            result = parseInt(input, 2).toString(16);
+            break;
+          case "hex2bin":
+            result = parseInt(input, 16).toString(2);
+            break;
+          case "bin2oct":
+            result = parseInt(input, 2).toString(8);
+            break;
+          case "oct2bin":
+            result = parseInt(input, 8).toString(2);
+            break;
+          case "bin2dec":
+            result = parseInt(input, 2).toString(10);
+            break;
+            case "dec2bin":
+            result = parseInt(input, 10).toString(2);
+            break;
+          case "dec2hex":
+            result = parseInt(input, 10).toString(16);
+            break;
+          case "hex2dec":
+            result = parseInt(input, 16).toString(10);
+            break;
+          default:
+            result = "Operasi tidak valid.";
+        }
+      }
+
+      document.getElementById("result").innerText = result;
+    }
+  </script>
+</body>
+</html>
